@@ -18,16 +18,16 @@ export default function CreatorDashboard() {
     const web3Modal = new Web3Modal()
     const provider = await web3Modal.connect()
     const web3 = new Web3(provider)
-   const networkId = await web3.eth.net.getId()
+    //const networkId = await web3.eth.net.getId()
 
     // Get listed NFTs
-    const marketPlaceContract = new web3.eth.Contract(Marketplace.abi, Marketplace.networks[networkId].address)
+    const marketPlaceContract = new web3.eth.Contract(Marketplace.abi, Marketplace.networks[5777].address)
     const accounts = await web3.eth.getAccounts()
     const listings = await marketPlaceContract.methods.getMyListedNfts().call({from: accounts[0]})
     // Iterate over my listed NFTs and retrieve their metadata
     const nfts = await Promise.all(listings.map(async i => {
       try {
-        const VITContract = new web3.eth.Contract(VITNFT.abi, VITNFT.networks[networkId].address)
+        const VITContract = new web3.eth.Contract(VITNFT.abi, VITNFT.networks[5777].address)
         const tokenURI = await VITContract.methods.tokenURI(i.tokenId).call();
         const meta = await axios.get(tokenURI);
         let item = {

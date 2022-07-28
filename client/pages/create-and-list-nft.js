@@ -58,13 +58,13 @@ export default function CreateItem() {
     const provider = await web3Modal.connect()
     const web3 = new Web3(provider)
     const url = await uploadToIPFS()
-    const networkId = await web3.eth.net.getId()
+    //const networkId = await web3.eth.net.getId()
     
     // Mint the NFT
-    const VITContractAddress = VITNFT.networks[networkId].address
+    const VITContractAddress = VITNFT.networks[5777].address
     const VITContract = new web3.eth.Contract(VITNFT.abi, VITContractAddress)
     const accounts = await web3.eth.getAccounts()
-    const marketPlaceContract = new web3.eth.Contract(Marketplace.abi, Marketplace.networks[networkId].address)
+    const marketPlaceContract = new web3.eth.Contract(Marketplace.abi, Marketplace.networks[5777].address)
     let listingFee = await marketPlaceContract.methods.getListingFee().call()
     listingFee = listingFee.toString()
 
