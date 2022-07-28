@@ -57,11 +57,11 @@ module.exports = {
         })
       }
     },
-    optimistic_kovan: {
+    optimistic_goerli: {
       network_id: 69,
       chain_id: 69,
       provider: function () {
-        return new HDWalletProvider(kovanMnemonic, "https://optimism-kovan.infura.io/v3/" + infuraKey, 0, 1);
+        return new HDWalletProvider(goerliMnemonic, "https://optimism-goerli.infura.io/v3/" + infuraKey, 0, 1);
       }
     },
     // requires a mainnet mnemonic; you can save this in .env or in whatever secure location

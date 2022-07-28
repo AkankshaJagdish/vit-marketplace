@@ -20,9 +20,9 @@ export default function MyAssets() {
     const web3Modal = new Web3Modal()
     const provider = await web3Modal.connect()
     const web3 = new Web3(provider)
-    //const networkId = await web3.eth.net.getId()
-    const marketPlaceContract = new web3.eth.Contract(Marketplace.abi, Marketplace.networks[5777].address)
-    const VITContractAddress = VITNFT.networks[5777].address
+    const networkId = await web3.eth.net.getId()
+    const marketPlaceContract = new web3.eth.Contract(Marketplace.abi, Marketplace.networks[networkId].address)
+    const VITContractAddress = VITNFT.networks[networkId].address
     const VITContract = new web3.eth.Contract(VITNFT.abi, VITContractAddress)
     const accounts = await web3.eth.getAccounts()
     const data = await marketPlaceContract.methods.getMyNfts().call({from: accounts[0]})
