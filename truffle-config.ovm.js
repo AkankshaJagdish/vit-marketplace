@@ -58,8 +58,8 @@ module.exports = {
       }
     },
     optimistic_goerli: {
-      network_id: 69,
-      chain_id: 69,
+      network_id: '*',
+      //chain_id: 69,
       provider: function () {
         return new HDWalletProvider(goerliMnemonic, "https://optimism-goerli.infura.io/v3/" + infuraKey, 0, 1);
       }

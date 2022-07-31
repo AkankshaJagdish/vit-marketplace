@@ -5,7 +5,7 @@ import axios from 'axios'
 import Web3Modal from 'web3modal'
 
 //import Marketplace from '../contracts/optimism-contracts/Marketplace.json'
-//import BoredPetsNFT from '../contracts/optimism-contracts/BoredPetsNFT.json'
+//import VITNFT from '../contracts/optimism-contracts/VITNFT.json'
 import Marketplace from '../contracts/ethereum-contracts/Marketplace.json'
 import VITNFT from '../contracts/ethereum-contracts/VITNFT.json'
 
@@ -33,12 +33,12 @@ export default function ResellNFT() {
         const web3Modal = new Web3Modal()
         const provider = await web3Modal.connect()
         const web3 = new Web3(provider)
-        //const networkId = await web3.eth.net.getId()
-        const marketPlaceContract = new web3.eth.Contract(Marketplace.abi, Marketplace.networks[5777].address)
+        const networkId = await web3.eth.net.getId()
+        const marketPlaceContract = new web3.eth.Contract(Marketplace.abi, Marketplace.networks[networkId].address)
         let listingFee = await marketPlaceContract.methods.getListingFee().call()
         listingFee = listingFee.toString()
         const accounts = await web3.eth.getAccounts()
-        marketPlaceContract.methods.resellNft(VITNFT.networks[5777].address, id, Web3.utils.toWei(formInput.price, "ether"))
+        marketPlaceContract.methods.resellNft(VITNFT.networks[networkId].address, id, Web3.utils.toWei(formInput.price, "ether"))
             .send({ from: accounts[0], value: listingFee }).on('receipt', function () {
                 console.log('listed')
                 router.push('/')
